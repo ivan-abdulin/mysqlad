@@ -46,6 +46,8 @@ gulp.task('browserSync', () => {
     });
 });
 
+gulp.task('reloadBrowser', browserSync.reload);
+
 /**
  * Watch tasks
  *
@@ -53,6 +55,7 @@ gulp.task('browserSync', () => {
  */
 gulp.task('watch', () => {
     gulp.watch('app/Resources/sass/**/*.scss', ['styles']);
+    gulp.watch('app/Resources/views/**/*.twig', ['reloadBrowser']);
 });
 
 gulp.task('default', [
