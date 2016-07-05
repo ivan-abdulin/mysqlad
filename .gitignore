@@ -25,3 +25,6 @@
 
 # Local ssl certs
 /ssl
+
+# Compiled assets
+/web/css
