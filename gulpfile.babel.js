@@ -5,6 +5,7 @@ import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
 import gulpif from 'gulp-if';
 import browserSync from 'browser-sync';
+import cssnano from 'gulp-cssnano';
 
 var environment = null;
 
@@ -29,6 +30,7 @@ gulp.task('styles', () => {
     return gulp.src('app/Resources/sass/app.scss')
         .pipe(gulpif(environment === 'dev', sourcemaps.init()))
         .pipe(sass())
+        .pipe(cssnano())
         .pipe(gulpif(environment === 'dev', sourcemaps.write()))
         .pipe(browserSync.stream())
         .pipe(gulp.dest('web/css'));
