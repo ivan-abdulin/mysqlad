@@ -2,6 +2,10 @@
 $grid-columns: 24;
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap";
 
+// Mysqlad icons
+$icomoon-font-path: '/fonts';
+@import "../mysqlad-icons/style.scss";
+
 // Variables
 
 // Abstractions

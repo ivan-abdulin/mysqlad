@@ -15,6 +15,14 @@ gulp.task('setEnvDev',  () => { environment = 'dev'; });
 gulp.task('setEnvProd', () => { environment = 'prod'; });
 
 /**
+ * Fonts
+ */
+gulp.task('fonts', () => {
+    return gulp.src('app/Resources/mysqlad-icons/fonts/*.{svg,ttf,woff}')
+        .pipe(gulp.dest('web/fonts'));
+});
+
+/**
  * Compile and copy styles
  */
 gulp.task('styles', () => {
@@ -50,11 +58,13 @@ gulp.task('watch', () => {
 gulp.task('default', [
     'setEnvDev', // synchronous
     'browserSync', // synchronous
+    'fonts',
     'styles',
     'watch'
 ]);
 
 gulp.task('deploy', [
     'setEnvProd',
+    'fonts',
     'styles'
 ]);
