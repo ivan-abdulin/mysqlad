@@ -4,6 +4,7 @@ import gulp from 'gulp';
 import sass from 'gulp-sass';
 import sourcemaps from 'gulp-sourcemaps';
 import gulpif from 'gulp-if';
+import browserSync from 'browser-sync';
 
 var environment = null;
 
@@ -21,9 +22,21 @@ gulp.task('styles', () => {
         .pipe(gulpif(environment === 'dev', sourcemaps.init()))
         .pipe(sass())
         .pipe(gulpif(environment === 'dev', sourcemaps.write()))
+        .pipe(browserSync.stream())
         .pipe(gulp.dest('web/css'));
 });
 
+
+/**
+ * Run browsersync
+ */
+gulp.task('browserSync', () => {
+    browserSync.init({
+        proxy: 'https://localhost',
+        notify: false,
+        open: false
+    });
+});
 
 /**
  * Watch tasks
@@ -36,6 +49,7 @@ gulp.task('watch', () => {
 
 gulp.task('default', [
     'setEnvDev', // synchronous
+    'browserSync', // synchronous
     'styles',
     'watch'
 ]);
