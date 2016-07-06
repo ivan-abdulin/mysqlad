@@ -75,6 +75,7 @@ gulp.task('browserSync', () => {
 });
 
 gulp.task('reloadBrowser', browserSync.reload);
+gulp.task('browserifyAndReloadBrowser', ['scripts'], browserSync.reload);
 
 /**
  * Watch tasks
@@ -84,6 +85,7 @@ gulp.task('reloadBrowser', browserSync.reload);
 gulp.task('watch', () => {
     gulp.watch('app/Resources/sass/**/*.scss', ['styles']);
     gulp.watch('app/Resources/views/**/*.twig', ['reloadBrowser']);
+    gulp.watch('app/Resources/scripts/**/*.js', ['browserifyAndReloadBrowser']);
 });
 
 gulp.task('default', [
