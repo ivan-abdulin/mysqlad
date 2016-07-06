@@ -1,9 +1,10 @@
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/book/service_container.html
 parameters:
-#    parameter_name: value
+    cache_buster.manifest: ../web/busters.json
+    cache_buster.format: '%%s?%%s'
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    app.assets.buster_version_strategy:
+        class: AppBundle\Asset\VersionStrategy\BusterVersionStrategy
+        arguments: ['%kernel.root_dir%/%cache_buster.manifest%', '%cache_buster.format%']

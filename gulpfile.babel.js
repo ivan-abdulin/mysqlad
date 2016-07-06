@@ -6,6 +6,7 @@ import sourcemaps from 'gulp-sourcemaps';
 import gulpif from 'gulp-if';
 import browserSync from 'browser-sync';
 import cssnano from 'gulp-cssnano';
+import bust from 'gulp-buster';
 
 var environment = null;
 
@@ -32,8 +33,10 @@ gulp.task('styles', () => {
         .pipe(sass())
         .pipe(cssnano())
         .pipe(gulpif(environment === 'dev', sourcemaps.write()))
-        .pipe(browserSync.stream())
-        .pipe(gulp.dest('web/css'));
+        .pipe(gulpif(environment === 'dev', browserSync.stream()))
+        .pipe(gulp.dest('web/css'))
+        .pipe(gulpif(environment === 'prod', bust({transform: transformAssetsPaths})))
+        .pipe(gulpif(environment === 'prod', gulp.dest('web')));
 });
 
 
@@ -73,3 +76,14 @@ gulp.task('deploy', [
     'fonts',
     'styles'
 ]);
+
+
+function transformAssetsPaths(rawHashes) {
+    let hashes = {};
+    for (let path in rawHashes) {
+        let newPath = path.replace('web/', '');
+        hashes[newPath] = rawHashes[path];
+    }
+
+    return hashes;
+}
