@@ -84,8 +84,16 @@ gulp.task('browserifyAndReloadBrowser', ['scripts'], browserSync.reload);
  */
 gulp.task('watch', () => {
     gulp.watch('app/Resources/sass/**/*.scss', ['styles']);
-    gulp.watch('app/Resources/views/**/*.twig', ['reloadBrowser']);
     gulp.watch('app/Resources/scripts/**/*.js', ['browserifyAndReloadBrowser']);
+
+    let backendRelated = [
+        'src/**/*.php',
+        'app/config/**/*.yml',
+        'app/Resources/views/**/*.twig',
+        'app/*.php',
+        'web/**/*.php'
+    ];
+    gulp.watch(backendRelated, ['reloadBrowser']);
 });
 
 gulp.task('default', [
