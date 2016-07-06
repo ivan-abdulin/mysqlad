@@ -28,5 +28,6 @@
 
 # Compiled assets
 /web/css
+/web/js
 /web/fonts
 /web/busters.json

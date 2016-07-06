@@ -7,6 +7,11 @@ import gulpif from 'gulp-if';
 import browserSync from 'browser-sync';
 import cssnano from 'gulp-cssnano';
 import bust from 'gulp-buster';
+import browserify from 'browserify';
+import babelify from 'babelify';
+import source from 'vinyl-source-stream';
+import buffer from 'vinyl-buffer';
+import uglify from 'gulp-uglify';
 
 var environment = null;
 
@@ -41,6 +46,24 @@ gulp.task('styles', () => {
 
 
 /**
+ * Scripts
+ */
+gulp.task('scripts', () => {
+    return browserify('app/Resources/scripts/main.js')
+        .transform('babelify')
+        .bundle()
+        .pipe(source('app.js'))
+        .pipe(buffer())
+        .pipe(gulpif(environment === 'dev', sourcemaps.init()))
+        .pipe(uglify())
+        .pipe(gulpif(environment === 'dev', sourcemaps.write()))
+        .pipe(gulp.dest('web/js'))
+        .pipe(gulpif(environment === 'prod', bust({transform: transformAssetsPaths})))
+        .pipe(gulpif(environment === 'prod', gulp.dest('web')))
+});
+
+
+/**
  * Run browsersync
  */
 gulp.task('browserSync', () => {
@@ -68,13 +91,15 @@ gulp.task('default', [
     'browserSync', // synchronous
     'fonts',
     'styles',
+    'scripts',
     'watch'
 ]);
 
 gulp.task('deploy', [
     'setEnvProd',
     'fonts',
-    'styles'
+    'styles',
+    'scripts'
 ]);
 
 
