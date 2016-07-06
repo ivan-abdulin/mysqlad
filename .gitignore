@@ -13,6 +13,7 @@
 !var/sessions/.gitkeep
 !var/SymfonyRequirements.php
 /vendor/
+/node_modules/
 /web/bundles/
 
 # Docker files
@@ -24,3 +25,9 @@
 
 # Local ssl certs
 /ssl
+
+# Compiled assets
+/web/css
+/web/js
+/web/fonts
+/web/busters.json
