@@ -31,3 +31,5 @@
 /web/js
 /web/fonts
 /web/busters.json
+
+tests/_output/*
