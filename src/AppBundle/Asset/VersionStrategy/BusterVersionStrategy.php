@@ -69,6 +69,10 @@ class BusterVersionStrategy implements VersionStrategyInterface
      */
     private function loadManifest()
     {
+        // todo: send error to log
+        if (!file_exists($this->manifestPath)) {
+            return null;
+        }
         $hashes = json_decode(file_get_contents($this->manifestPath), true);
 
         return $hashes;

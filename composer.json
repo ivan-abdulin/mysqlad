@@ -22,7 +22,9 @@
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
-        "rollbar/rollbar": "^0.18.2"
+        "rollbar/rollbar": "^0.18.2",
+        "codeception/codeception": "^2.2",
+        "mikey179/vfsStream": "^1.6"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
@@ -45,11 +47,6 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ]
-    },
-    "config": {
-        "platform": {
-            "php": "5.5.9"
-        }
     },
     "extra": {
         "symfony-app-dir": "app",
