@@ -1,0 +1,11 @@
+services:
+    app.admin.post:
+        class: AppBundle\Admin\ExplanationAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Explanation" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Explanation
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
