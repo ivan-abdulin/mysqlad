@@ -32,6 +32,23 @@ framework:
     http_method_override: true
     assets: ~
 
+# Sonata Admin Configuration
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+
+sonata_translation:
+    locales: [en]
+    default_locale: en
+#    gedmo:
+#        enabled: true
+#    knplabs:
+#        enabled: true
+    #phpcr:
+    #    enabled: true
+
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"
