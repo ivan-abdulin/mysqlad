@@ -25,7 +25,9 @@ $loader = require __DIR__.'/../app/autoload.php';
 Debug::enable();
 
 $kernel = new AppKernel('dev', true);
-$kernel->loadClassCache();
+if (!in_array(@$_SERVER['REMOTE_ADDR'], ['127.0.0.1', '172.24.0.1', 'fe80::1', '::1'])) {
+    $kernel->loadClassCache();
+}
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();
