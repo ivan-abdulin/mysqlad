@@ -25,7 +25,10 @@
         "rollbar/rollbar": "^0.18.2",
         "codeception/codeception": "^2.2",
         "mikey179/vfsStream": "^1.6",
-        "doctrine/doctrine-migrations-bundle": "^1.1"
+        "doctrine/doctrine-migrations-bundle": "^1.1",
+        "sonata-project/translation-bundle": "^2.0",
+        "sonata-project/doctrine-orm-admin-bundle": "^3.0",
+        "sonata-project/admin-bundle": "^3.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
