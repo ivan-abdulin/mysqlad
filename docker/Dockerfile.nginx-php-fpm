@@ -1,0 +1,18 @@
+FROM richarvey/nginx-php-fpm:beta70
+MAINTAINER "Ivan Abdulin" <ivan.abdulin@gmail.com>
+
+RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
+
+RUN apt-get update && \
+    apt-get dist-upgrade -y && \
+    apt-get install -y mc wget curl bash-completion build-essential php-mbstring ruby-full
+
+RUN gem install listen sass
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
+RUN curl -sL https://deb.nodesource.com/setup_5.x | bash -
+RUN apt-get install -y nodejs
+RUN npm install -g gulp grunt-cli phantomjs-prebuilt
+
+RUN rm -rf /etc/nginx/sites-available/default.conf
+ADD docker/nginx-site.conf /etc/nginx/sites-available/default.conf
