@@ -13,8 +13,7 @@ before_install:
     - docker-compose ps
     - echo hello
 
-install
+install:
     - docker run mysqlad_nginx_php_fpm_1 /bin/sh -c "cd /usr/share/nginx/html && composer install"
 
-test
-    - docker run mysqlad_nginx_php_fpm_1 /bin/sh -c "cd /usr/share/nginx/html && vendor/bin/codecept"
+script: docker run mysqlad_nginx_php_fpm_1 /bin/sh -c "cd /usr/share/nginx/html && vendor/bin/codecept"
