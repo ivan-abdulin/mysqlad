@@ -2,5 +2,18 @@ language: php
 php:
     - '7.0'
 
-install:
-    - composer install
+sudo: required
+
+services:
+    - docker
+
+before_install:
+    - docker-compose build
+    - docker-compose up -d
+    - docker-compose ps
+
+install
+    - docker run mysqlad_nginx_php_fpm_1 /bin/sh -c "cd /usr/share/nginx/html && composer install"
+
+test
+    - docker run mysqlad_nginx_php_fpm_1 /bin/sh -c "cd /usr/share/nginx/html && vendor/bin/codecept"
