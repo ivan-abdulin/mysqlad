@@ -8,6 +8,8 @@ services:
     - docker
 
 install:
+    - ls -Al
+    - docker-compose --version
     - composer install
     - docker-compose build
     - docker-compose up -d
