@@ -1,7 +1,6 @@
 nginx_php_fpm:
-    build:
-        context: .
-        dockerfile: docker/Dockerfile.nginx-php-fpm
+    build: .
+    dockerfile: docker/Dockerfile.nginx-php-fpm
     volumes:
         - .:/usr/share/nginx/html
         - ./ssl:/etc/nginx/ssl
@@ -10,9 +9,8 @@ nginx_php_fpm:
         - mysql_cms
 
 mysql_cms:
-    build:
-        context: .
-        dockerfile: docker/Dockerfile.mysql
+    build: .
+    dockerfile: docker/Dockerfile.mysql
     env_file:
         - docker/env_common
         - docker/env_mysql
