@@ -7,9 +7,13 @@ sudo: required
 services:
     - docker
 
+before_install:
+    - ls -Al
+
 install:
     - ls -Al
     - docker-compose --version
+    - docker --version
     - composer install
     - docker-compose build
     - docker-compose up -d
