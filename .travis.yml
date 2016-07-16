@@ -7,18 +7,7 @@ sudo: required
 services:
     - docker
 
-before_install:
-    - whoami
-    - ls -Al
-
 install:
-    - whoami
-    - ls -Al
-    - docker-compose --version
-    - docker --version
     - composer install
-    - docker-compose build
-    - docker-compose up -d
-    - docker-compose ps
 
-script: docker run mysqlad_nginx_php_fpm_1 /bin/sh -c "cd /usr/share/nginx/html && vendor/bin/codecept"
+script: vendor/bin/codecept"
