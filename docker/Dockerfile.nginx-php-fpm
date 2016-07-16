@@ -2,7 +2,7 @@ FROM richarvey/nginx-php-fpm:php7
 MAINTAINER "Ivan Abdulin" <ivan.abdulin@gmail.com>
 
 RUN apk update && apk upgrade && \
-    apk add mc sudo nodejs && \
+    apk add mc sudo nodejs php7-ctype && \
     npm install -g gulp grunt-cli phantomjs-prebuilt
 
 ENV dev_user_name dev

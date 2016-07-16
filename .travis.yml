@@ -10,4 +10,4 @@ services:
 install:
     - composer install
 
-script: vendor/bin/codecept run
+script: vendor/bin/codecept run -c app/config/codeception.yml
