@@ -2,7 +2,8 @@ FROM richarvey/nginx-php-fpm:php7
 MAINTAINER "Ivan Abdulin" <ivan.abdulin@gmail.com>
 
 RUN apk update && apk upgrade && \
-    apk add mc sudo
+    apk add mc sudo nodejs && \
+    npm install -g gulp grunt-cli phantomjs-prebuilt
 
 ENV dev_user_name dev
 ENV dev_user_uid 1000
@@ -15,25 +16,3 @@ RUN adduser -D -u ${dev_user_uid} ${dev_user_name} && \
     sed -i -e "s/group = nginx/group = dev/g" /etc/php7/php-fpm.d/www.conf && \
     rm -f /etc/nginx/sites-available/default.conf
 ADD docker/nginx-site.conf /etc/nginx/sites-available/default.conf
-
-ENV VERSION=v6.3.0 NPM_VERSION=3
-
-# For base builds
-# ENV CONFIG_FLAGS="--without-npm" RM_DIRS=/usr/include
-ENV CONFIG_FLAGS="--fully-static --without-npm" DEL_PKGS="libgcc libstdc++" RM_DIRS=/usr/include
-
-RUN apk add curl make gcc g++ python linux-headers paxctl libgcc libstdc++ gnupg && \
-    curl -o node-${VERSION}.tar.gz -sSL https://nodejs.org/dist/${VERSION}/node-${VERSION}.tar.gz && \
-    tar -zxf node-${VERSION}.tar.gz && \
-    cd node-${VERSION} && \
-    export GYP_DEFINES="linux_use_gold_flags=0" && \
-    ./configure --prefix=/usr && \
-    NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
-    make -j${NPROC} -C out mksnapshot BUILDTYPE=Release && \
-    paxctl -cm out/Release/mksnapshot && \
-    make -j${NPROC} && \
-    make install && \
-    paxctl -cm /usr/bin/node && \
-    cd / && \
-    npm install -g npm@${NPM_VERSION} && \
-    npm install -g gulp grunt-cli phantomjs-prebuilt
