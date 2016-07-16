@@ -10,4 +10,4 @@ services:
 install:
     - composer install
 
-script: vendor/bin/codecept
+script: vendor/bin/codecept run
