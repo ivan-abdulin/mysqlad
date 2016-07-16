@@ -9,7 +9,7 @@ $loader = require __DIR__.'/../app/autoload.php';
 include_once __DIR__.'/../var/bootstrap.php.cache';
 
 $kernel = new AppKernel('prod', false);
-if (!in_array(@$_SERVER['REMOTE_ADDR'], ['127.0.0.1', '172.24.0.1', 'fe80::1', '::1'])) {
+if (!in_array(@$_SERVER['REMOTE_ADDR'], ['127.0.0.1', '172.17.0.1', 'fe80::1', '::1'])) {
     $kernel->loadClassCache();
 }
 //$kernel = new AppCache($kernel);

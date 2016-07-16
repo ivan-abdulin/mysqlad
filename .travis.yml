@@ -8,9 +8,11 @@ services:
     - docker
 
 before_install:
+    - whoami
     - ls -Al
 
 install:
+    - whoami
     - ls -Al
     - docker-compose --version
     - docker --version

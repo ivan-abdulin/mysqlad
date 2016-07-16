@@ -2,7 +2,7 @@ nginx_php_fpm:
     build: .
     dockerfile: docker/Dockerfile.nginx-php-fpm
     volumes:
-        - .:/usr/share/nginx/html
+        - .:/var/www/html
         - ./ssl:/etc/nginx/ssl
     env_file: docker/env_common
     links:
