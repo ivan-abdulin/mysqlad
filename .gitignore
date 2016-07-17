@@ -16,10 +16,6 @@
 /node_modules/
 /web/bundles/
 
-# Docker files
-/docker-compose.yml
-/docker
-
 # IDE
 /.idea
 

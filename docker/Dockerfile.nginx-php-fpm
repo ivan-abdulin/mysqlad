@@ -1,0 +1,18 @@
+FROM richarvey/nginx-php-fpm:php7
+MAINTAINER "Ivan Abdulin" <ivan.abdulin@gmail.com>
+
+RUN apk update && apk upgrade && \
+    apk add mc sudo nodejs php7-ctype php7-json && \
+    npm install -g gulp grunt-cli phantomjs-prebuilt
+
+ENV dev_user_name dev
+ENV dev_user_uid 1000
+
+RUN adduser -D -u ${dev_user_uid} ${dev_user_name} && \
+    echo "%${dev_user_name} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/dev && \
+    sed -i -e "s/#user  nobody/user dev/g" /etc/nginx/nginx.conf && \
+    sed -i -e "s/listen.owner = nginx/listen.owner = dev/g" /etc/php7/php-fpm.d/www.conf && \
+    sed -i -e "s/user = nginx/user = dev/g" /etc/php7/php-fpm.d/www.conf && \
+    sed -i -e "s/group = nginx/group = dev/g" /etc/php7/php-fpm.d/www.conf && \
+    rm -f /etc/nginx/sites-available/default.conf
+ADD docker/nginx-site.conf /etc/nginx/sites-available/default.conf
