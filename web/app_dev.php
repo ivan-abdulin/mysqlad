@@ -12,7 +12,7 @@ use Symfony\Component\Debug\Debug;
 // Feel free to remove this, extend it, or make something more sophisticated.
 if (isset($_SERVER['HTTP_CLIENT_IP'])
     || isset($_SERVER['HTTP_X_FORWARDED_FOR'])
-    || !(in_array(@$_SERVER['REMOTE_ADDR'], ['127.0.0.1', '172.17.0.1', 'fe80::1', '::1']) || php_sapi_name() === 'cli-server')
+    || !(in_array(@$_SERVER['REMOTE_ADDR'], ['127.0.0.1', '172.24.0.1', 'fe80::1', '::1']) || php_sapi_name() === 'cli-server')
 ) {
     header('HTTP/1.0 403 Forbidden');
     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
@@ -25,7 +25,7 @@ $loader = require __DIR__.'/../app/autoload.php';
 Debug::enable();
 
 $kernel = new AppKernel('dev', true);
-if (!in_array(@$_SERVER['REMOTE_ADDR'], ['127.0.0.1', '172.17.0.1', 'fe80::1', '::1'])) {
+if (!in_array(@$_SERVER['REMOTE_ADDR'], ['127.0.0.1', '172.24.0.1', 'fe80::1', '::1'])) {
     $kernel->loadClassCache();
 }
 $request = Request::createFromGlobals();
