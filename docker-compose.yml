@@ -19,3 +19,6 @@ services:
         env_file:
             - docker/env_common
             - docker/env_mysql
+        volumes:
+            - ./docker/mysql.conf.d:/etc/mysql/conf.d
+            - ./var/db_logs:/var/log/mysql

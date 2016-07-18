@@ -1,2 +1,6 @@
 FROM mysql:5.7
 MAINTAINER "Ivan Abdulin" <ivan.abdulin@gmail.com>
+
+RUN mkdir -p /var/log/mysql && \
+    touch /var/log/mysql/general.log && \
+    chown -R mysql:mysql /var/log/mysql
