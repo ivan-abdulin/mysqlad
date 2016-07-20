@@ -1,0 +1,17 @@
+nginx-php-fpm:
+    image: mysqlad/nginx_php_fpm
+    ports:
+        - "80:80"
+        - "443:443"
+    links:
+        - "mysql-cms"
+
+mysql-cms:
+    image: mysqlad/mysql_cms
+    ports:
+        - "3306:3306"
+    environment:
+        - MYSQL_DATABASE
+        - MYSQL_USER
+        - MYSQL_PASSWORD
+        - MYSQL_ROOT_PASSWORD
