@@ -8,7 +8,8 @@ services:
         volumes:
             - .:/var/www/html
             - ./ssl:/etc/nginx/ssl
-        env_file: docker/env_common
+        env_file:
+            - docker/env_common
         links:
             - mysql_cms
 
