@@ -13,3 +13,14 @@ install:
     - gulp deploy
 
 script: vendor/bin/codecept run -c app/config/codeception.yml
+
+after_success:
+    - rm -rf node_modules
+    - npm install --only=prod
+    - rm -rf vendor
+    - composer install --no-dev --optimize-autoloader
+    - mkdir build
+    - mv .babelrc .gitignore * build
+    - ls -Al build
+    - tar -czf mysqlad.tar.gz build
+    - ls -Al .
