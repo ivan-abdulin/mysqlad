@@ -21,6 +21,5 @@ after_success:
     - composer install --no-dev --optimize-autoloader
     - mkdir build
     - mv .babelrc .gitignore * build
-    - ls -Al build
+    - ls -Al build/app/config
     - tar -czf mysqlad.tar.gz build
-    - ls -Al .
