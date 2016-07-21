@@ -9,6 +9,7 @@ services:
 
 install:
     - composer install
+    - openssl aes-256-cbc -K $encrypted_82f3857e208a_key -iv $encrypted_82f3857e208a_iv -in app/config/parameters_dev_server.yml.enc -out app/config/parameters.yml -d
     - npm install
     - gulp deploy
 
